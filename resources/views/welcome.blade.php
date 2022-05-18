@@ -63,76 +63,7 @@
 
         </div>
     </div>
-    <div class="container col-lg-11 col-md-6 col-sm-4 py-4">
-        <div class="row justify-content-between">
-            @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-            @endif
-            @if(session('success'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('success') }}
-                    </div>
-            @endif
-                @if(session('message'))
-                    <div class="alert alert-info" role="alert">
-                        {{ session('message') }}
-                    </div>
-                @endif
-        </div>
-        <div class="row">
-            @foreach($services as $service)
-                <div class="col-md-4">
-                    <div class="card card-info card-outline">
-                        <div class="card-header"><h5
-                                class="text-black text-capitalize">{{ $service->service_name ?? ''}}</h5>
-
-                        </div>
-                        <div class="card-body">
-                            <p class="text-sm"
-                               style="text-transform: lowercase;"> {{ Str::limit($service->service_description ?? '', 40) }}
-                            </p>
-                            <div class="row">
-                                <div class="col-8">
-                                    <p class="text-sm text-black-500">
-                                        <strong>
-                                            Price: {{ App\Models\Service::CURRENCY_SELECT[$service->currency] ?? '' }} {{ number_format($service->price) }}
-                                            / 1 Hour
-                                            @if($service->status == 1)
-                                                <span class="fa fa-globe" data-toggle="tooltip" data-placement="top"
-                                                      title="This is an online meeting">
-                                                </span>
-                                            @else
-                                                <span class="fa fa-users" data-toggle="tooltip" data-placement="top"
-                                                      title="You can come to our office and have a meeting">
-                                                </span>
-                                            @endif
-                                        </strong>
-                                    </p>
-                                </div>
-                                <div class="col-4">
-
-                                    <p class="text-sm"><span class="fa fa-clock" data-toggle="tooltip"
-                                                             data-placement="top"
-                                                             title="This meeting can take {{ $service->duration }}"></span> {{ $service->duration }}
-                                    </p>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-primary"
-                               onclick="$('#service').val({{ $service->id }}); $('form').show()">
-                                Book now
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-        <div class="col-md-8">
+    <div class="col-md-8">
             <form class="card" method="POST" action="{{ route('pay') }}" style="{{ $errors->isEmpty() ? 'display:none;' : '' }}">
                 @csrf
                 <div class="card-header"><h4 class="text-center">Book your date to meet.</h4></div>
@@ -259,6 +190,76 @@
                 </div>
             </form>
         </div>
+    <div class="container col-lg-11 col-md-6 col-sm-4 py-4">
+        <div class="row justify-content-between">
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+            @if(session('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('success') }}
+                    </div>
+            @endif
+                @if(session('message'))
+                    <div class="alert alert-info" role="alert">
+                        {{ session('message') }}
+                    </div>
+                @endif
+        </div>
+        <div class="row">
+            @foreach($services as $service)
+                <div class="col-md-4">
+                    <div class="card card-info card-outline">
+                        <div class="card-header"><h5
+                                class="text-black text-capitalize">{{ $service->service_name ?? ''}}</h5>
+
+                        </div>
+                        <div class="card-body">
+                            <p class="text-sm"
+                               style="text-transform: lowercase;"> {{ Str::limit($service->service_description ?? '', 40) }}
+                            </p>
+                            <div class="row">
+                                <div class="col-8">
+                                    <p class="text-sm text-black-500">
+                                        <strong>
+                                            Price: {{ App\Models\Service::CURRENCY_SELECT[$service->currency] ?? '' }} {{ number_format($service->price) }}
+                                            / 1 Hour
+                                            @if($service->status == 1)
+                                                <span class="fa fa-globe" data-toggle="tooltip" data-placement="top"
+                                                      title="This is an online meeting">
+                                                </span>
+                                            @else
+                                                <span class="fa fa-users" data-toggle="tooltip" data-placement="top"
+                                                      title="You can come to our office and have a meeting">
+                                                </span>
+                                            @endif
+                                        </strong>
+                                    </p>
+                                </div>
+                                <div class="col-4">
+
+                                    <p class="text-sm"><span class="fa fa-clock" data-toggle="tooltip"
+                                                             data-placement="top"
+                                                             title="This meeting can take {{ $service->duration }}"></span> {{ $service->duration }}
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-primary"
+                               onclick="$('#service').val({{ $service->id }}); $('form').show()">
+                                Book now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        
 
     </div>
     <div class="container col-md-11">
